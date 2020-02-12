@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>DB’s modeling code Tools</title>
+    
+      <link rel="stylesheet" href="_static/pygments.css">
+      <link rel="stylesheet" href="_static/theme.css">
+      <link rel="stylesheet" href="_static/sphinx_press_theme.css">
+      
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+
+      <!-- sphinx script_files -->
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+
+      
+      <script src="_static/theme-vendors.js"></script>
+      <script src="_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="genindex.html" />
+  <link rel="search" title="Search" href="search.html" />
+  <link rel="prev" title="Welcome to uLAT’s documentation!" href="index.html" /> 
+  </head>
+
+  <body>
+    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="index.html" class="home-link">
+    
+      <span class="site-name">ulat</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="index.html#how-to-use-this-documentation">Content</a></span>
+      </p>
+      <ul class="current">
+        
+          <li class="toctree-l1 current"><a href="#" class="reference internal current">DB’s modeling code Tools</a>
+
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#module-ulat.dbc.tools" class="reference internal">Input/Output</a></li>
+                
+                  <li class="toctree-l2"><a href="#module-ulat.dbc.instruments" class="reference internal">Dataset</a></li>
+                
+                  <li class="toctree-l2"><a href="#module-ulat.dbc.io" class="reference internal">Output files</a></li>
+                
+              </ul>
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    
+    <li>DB’s modeling code Tools</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="index.html"
+       title="previous chapter">← Welcome to uLAT’s documentation!</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main">
+            
+  <div class="section" id="db-s-modeling-code-tools">
+<h1>DB’s modeling code Tools<a class="headerlink" href="#db-s-modeling-code-tools" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-ulat.dbc.tools">
+<span id="input-output"></span><h2>Input/Output<a class="headerlink" href="#module-ulat.dbc.tools" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ulat.dbc.tools.from_parfile">
+<code class="sig-prename descclassname">ulat.dbc.tools.</code><code class="sig-name descname">from_parfile</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">path='./'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ulat/dbc/tools.html#from_parfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ulat.dbc.tools.from_parfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load instrument properties from a ‘par’ file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – name of the parfile.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – path to the parfile</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A <code class="xref py py-obj docutils literal notranslate"><span class="pre">ulat.dbc.Dataset</span></code> object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#ulat.dbc.instruments.Dataset" title="ulat.dbc.instruments.Dataset">ulat.dbc.instruments.Dataset</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#ulat.dbc.tools.from_parfile" title="ulat.dbc.tools.from_parfile"><code class="xref py py-func docutils literal notranslate"><span class="pre">ulat.dbc.tools.from_parfile()</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-ulat.dbc.instruments">
+<span id="dataset"></span><h2>Dataset<a class="headerlink" href="#module-ulat.dbc.instruments" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ulat.dbc.instruments.Dataset">
+<em class="property">class </em><code class="sig-prename descclassname">ulat.dbc.instruments.</code><code class="sig-name descname">Dataset</code><span class="sig-paren">(</span><em class="sig-param">dataset</em>, <em class="sig-param">path='.'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ulat/dbc/instruments.html#Dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ulat.dbc.instruments.Dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Load and store information about instruments, telescopes and filters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> (<em>str</em>) – name of the dataset.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – path to the dataset.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Examples:</p>
+<p>If dataset=’OB151670’, then the class loads the file ‘parOB151670’, and the
+instruments properties are stored in the attribute <code class="xref py py-obj docutils literal notranslate"><span class="pre">DBDataset.instruments</span></code>.
+The observations files are, for example, OB151670.ogle.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ulat.dataset</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parfile</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="s1">&#39;OB151670&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#ulat.dbc.tools.from_parfile" title="ulat.dbc.tools.from_parfile"><code class="xref py py-func docutils literal notranslate"><span class="pre">ulat.dbc.tools.from_parfile()</span></code></a></p>
+</div>
+<dl class="attribute">
+<dt id="ulat.dbc.instruments.Dataset.instruments">
+<code class="sig-name descname">instruments</code><a class="headerlink" href="#ulat.dbc.instruments.Dataset.instruments" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> with all the parameters of each instrument.
+Keywords are the same as in the par* files.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ulat.dbc.io">
+<span id="output-files"></span><h2>Output files<a class="headerlink" href="#module-ulat.dbc.io" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ulat.dbc.io.Output">
+<em class="property">class </em><code class="sig-prename descclassname">ulat.dbc.io.</code><code class="sig-name descname">Output</code><span class="sig-paren">(</span><em class="sig-param">run</em>, <em class="sig-param">path='./'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ulat/dbc/io.html#Output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ulat.dbc.io.Output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class that load a model, the corresponding data and residuals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>run</strong> (<em>str</em>) – name of the run for which the files should be loaded.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – path to the output files.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="ulat.dbc.io.Output.idx_data">
+<code class="sig-name descname">idx_data</code><a class="headerlink" href="#ulat.dbc.io.Output.idx_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>line number (int) of the first data in resid file.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ulat.dbc.io.Output.param">
+<code class="sig-name descname">param</code><a class="headerlink" href="#ulat.dbc.io.Output.param" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.Series</span></code> with model parameters, including flux.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ulat.dbc.io.Output.resid">
+<code class="sig-name descname">resid</code><a class="headerlink" href="#ulat.dbc.io.Output.resid" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> of the data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ulat.dbc.io.Output.compare">
+<code class="sig-name descname">compare</code><span class="sig-paren">(</span><em class="sig-param">model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ulat/dbc/io.html#Output.compare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ulat.dbc.io.Output.compare" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ulat.dbc.io.Output.load">
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param">resid=True</em>, <em class="sig-param">model=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ulat/dbc/io.html#Output.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ulat.dbc.io.Output.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that load the output files.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="index.html"
+       title="previous chapter">← Welcome to uLAT’s documentation!</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2020, Clément Ranc.
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
+</div>
+            </div>
+          </div>
+      </page>
+    </div>
+    
+    
+  </body>
+</html>

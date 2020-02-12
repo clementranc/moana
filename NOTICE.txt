@@ -1,0 +1,24 @@
+PLOTTOOLS
+^^^^^^^^^
+
+This notice is not written yet.
+
+To run the code:
+   1/ Write the path to the directory "MOA_2006-2014" in the ligne 167
+   of the file azalea/main.py
+   2/ Run the script
+      python main.py
+
+Dependencies
+============
+
+You will need Python 2.7 and to install, in particular, the following python packages:
+- Bokeh
+- logging
+
+Contact
+=======
+
+For any comment or suggestion, please contact Clément Ranc
+(clement.ranc [at] nasa.gov).
+
