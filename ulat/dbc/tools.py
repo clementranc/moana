@@ -12,8 +12,6 @@ def from_parfile(filename: str, path: str = './') -> dbc.Dataset:
     Return:
         A :obj:`ulat.dbc.Dataset` object.
 
-    .. seealso::
-        :func:`ulat.dbc.tools.from_parfile`
     """
     dataset = filename.split('par')[1]
     dataset = dbc.Dataset(dataset, path=path)
