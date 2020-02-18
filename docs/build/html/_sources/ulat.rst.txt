@@ -1,8 +1,0 @@
-DB's modeling code Tools
-========================
-
-.. toctree::
-   :maxdepth: 3
-   :caption: Input/Output
-
-   dbc
