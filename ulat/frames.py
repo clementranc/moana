@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
+import sys
 from typing import Literal
 
 class LensReferenceFrame:
@@ -21,6 +22,30 @@ class LensReferenceFrame:
 
         self.center = center
         self.x_axis = x_axis
+
+    @property
+    def center(self):
+        return self._center
+    
+    @center.setter
+    def center(self, value):
+        self._center = value
+        
+        if (not value == 'barycenter') & (not value == 'primary') & (not value == 'secondary'):
+            txt = "Argument error: [center = 'barycenter' | 'primary' | 'secondary']."
+            sys.exit(txt)
+
+    @property
+    def x_axis(self):
+        return self._x_axis
+    
+    @center.setter
+    def x_axis(self, value):
+        self._x_axis = value
+        
+        if (not value == '12') & (not value == '21'):
+            txt = "Argument error: [x_axis = '12' | '21']."
+            sys.exit(txt)
 
     def to_frame(self, z: np.ndarray, new_frame: LensReferenceFrame, **kwargs):
         """Compute positions in a new reference frame.
@@ -43,36 +68,36 @@ class LensReferenceFrame:
         gl1 = kwargs['gl1']
         x_offset = 0
         
-        if not self.center == new_frame.center:
-            if self.center == 'primary':
+        if not self._center == new_frame.center:
+            if self._center == 'primary':
                 if new_frame.center == 'secondary':
                     x_offset = sep
                 if new_frame.center == 'barycenter':
                     x_offset = np.abs(gl1)
 
-            if self.center == 'secondary':
+            if self._center == 'secondary':
                 if (new_frame.center == 'primary'):
                     x_offset = - sep
                 if (new_frame.center == 'barycenter'):
                     x_offset = - sep + np.abs(gl1)
 
-            if self.center == 'barycenter':
+            if self._center == 'barycenter':
                 if (new_frame.center == 'primary'):
                     x_offset = - np.abs(gl1)
                 if (new_frame.center == 'secondary'):
                     x_offset = sep - np.abs(gl1)
         
-        if self.x_axis == new_frame.x_axis:
-            if self.x_axis == '12':
+        if self._x_axis == new_frame.x_axis:
+            if self._x_axis == '12':
                 z_new['after'] = z_new['after'] - x_offset
-            if self.x_axis == '21':
+            if self._x_axis == '21':
                 z_new['after'] = z_new['after'] + x_offset
 
         else:
             z_new['after'] = - z_new['after'].values.conjugate()
-            if self.x_axis == '12':
+            if self._x_axis == '12':
                 z_new['after'] = z_new['after'] + x_offset
 
-            if self.x_axis == '21':
+            if self._x_axis == '21':
                 z_new['after'] = z_new['after'] - x_offset
         return z_new['after'].values
