@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import numpy as np
 import pandas as pd
 from typing import Literal
@@ -7,18 +9,20 @@ class LensReferenceFrame:
 
     Args:
         center: origin of the frame.
-        x_axis: direction of the x-axis.
+        x_axis: direction of the x-axis. The primary (secondary) is '1' ('2'),
+            so '12' means: 'from the primary, to the secondary'.
 
     """
 
     hint_frame = Literal['barycenter', 'primary', 'secondary']
+    hint_dir = Literal['12', '21']
 
-    def __init__(self, center: hint_frame = 'barycenter', x_axis: str = '12'):
+    def __init__(self, center: hint_frame = 'barycenter', x_axis: hint_dir = '12'):
 
         self.center = center
         self.x_axis = x_axis
 
-    def to_frame(self, z: np.ndarray, new_frame: hint_frame, **kwargs):
+    def to_frame(self, z: np.ndarray, new_frame: LensReferenceFrame, **kwargs):
         """Compute positions in a new reference frame.
 
         Args:
@@ -26,8 +30,9 @@ class LensReferenceFrame:
             new_frame: new reference frame.
 
         Keyword arguments:
-            sep (float): separation
-            titi (int): jj
+            sep (float): separation in Einstein units.
+            gl1 (float): distance from the barycenter to the primary, in Einstein
+                units
 
         """
         z_new = pd.DataFrame()
