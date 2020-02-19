@@ -13,6 +13,7 @@
 import datetime
 import os
 import sys
+import ulat
 sys.path.insert(0, os.path.abspath('../../ulat'))
 
 
