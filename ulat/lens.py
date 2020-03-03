@@ -1,5 +1,8 @@
+import concave_hull
+import copy
 from .frames import LensReferenceFrame
 import numpy as np
+import pandas as pd
 from typing import Optional
 
 
@@ -67,6 +70,90 @@ class Microlens:
 #            return self.caustic.edge
 
 
+class ResonantCaustic:
+    """Sample a resonant caustic.
+
+    Args:
+	sep: separation between primary and secondary, in units of the Einstein radius.
+	q: planet-to-host star mass ratio.
+
+    Keyword arguments:
+	s (float): alias for sep.
+	eps1 (float): planet-to-host star mass fraction. 
+
+    """
+
+    def __init__(self,
+            sep: float = 1.0, 
+            q: float = 1e-3, 
+            **kwargs):
+
+        self.sep = sep
+        self.q = q
+        self.xcoords = np.array([0.0, -sep])
+        self.eps = np.array([1.0/(1.0+q), q/(1.0+q)])        
+        self.edge = None
+        self._ntot = 50
+
+    def _sample(self, ntot, uniform=False):
+
+        nb = int(0.5 * ntot)
+        if uniform:
+            phi_s = self._curvilinear_length()
+            uniform_phi_s = self._make_uniform(phi_s, nb)
+            self.phi_s = phi_s
+            self.uniform_phi_s = uniform_phi_s
+            phi = uniform_phi_s[0]
+        else:
+            phi_min = 0
+            phi_max = 2 * np.pi
+            phi = np.linspace(phi_min, phi_max, ntot, endpoint=False)
+        
+        # Use an angle as parameter to sample the caustic
+        sampling = pd.DataFrame()
+        sampling['phi'] = phi
+        sampling['phi_for_roots'] = phi
+
+        mask = sampling['phi'] > 2*np.pi
+        sampling.loc[mask, 'phi_for_roots'] = sampling.loc[mask, 'phi'] - 2*np.pi
+        
+        # Find the critical points
+        z = np.array([critic_2l(self.sep, self.q, a) for a in sampling['phi_for_roots'].values])
+        
+        # Map the critical curves from the lens to source plane
+        zz = np.array([lens_equation_2l(self.xcoords, self.eps, a) for a in z])
+
+        # Store the caustic
+        zetasp = ['zeta0', 'zeta1', 'zeta2', 'zeta3']
+        zetalp = ['z0', 'z1', 'z2', 'z3']
+        for i in range(4):
+            sampling[zetasp[i]] = zz.T[i]
+            sampling[zetalp[i]] = z.T[i]
+        
+        # Choose zeta2, zeta3 for Im(zz) > 0
+        for i in range(len(sampling)):
+            y = copy.copy(sampling)
+            x = y.loc[i, zetasp]
+            mask = np.argsort(x.to_numpy().imag)
+            for j in range(4):
+                sampling.loc[i, zetasp[j]] = y.loc[i, zetasp[mask[j]]]
+
+        if not uniform:
+            self.edge = self._sort_points_using_concave_hull_algo(sampling)
+            sampling.sort_values('phi', ascending=True, inplace=True)
+            self.half_caustic = sampling
+
+    def _sort_points_using_concave_hull_algo(self, sampling) -> np.ndarray:
+        zetasp = ['zeta2']
+        points = sampling[zetasp].to_numpy()
+        points = points.reshape((len(sampling), 1)).flatten()
+        points = np.array([points.real, points.imag]).T
+        self.points = points
+        hull = concave_hull.compute(points, 3, iterate=True)
+        hull = np.array([hull.T[0] + 1j * hull.T[1]]).flatten()
+        return hull
+
+
 # FUNCTIONS FOR 2-BODY LENSES
 # ===========================
 
@@ -112,12 +199,12 @@ def lens_equation_2l(
     Returns:
         numpy array of the corresponding position in the source plane
     """
-    return np.array(z - wk(1, xcoords, eps, np.conjugate(z)))
+    return np.array(z - wk(np.conj(z), xcoords, eps, 1))
 
 def get_dzdphi(sep, q, z):
     s_list = np.array([0.0, -sep])
     eps_list = np.array([1.0/(1.0+q), q/(1.0+q)])
-    return -1j * wk(2, s_list, eps_list, z) / wk(3, s_list, eps_list, z)
+    return -1j * wk(z, s_list, eps_list, 1) / wk(3, s_list, eps_list, z)
 
 def get_dzeta_phi(s, q, z):
     #offset = z + s
@@ -182,8 +269,8 @@ def wk(z: complex,
     if not affix.shape[0] == mass_fraction.shape[0]:
         sys.exit("Error: not the same number of mass fractions and lenses.")
     x = 0
-    for i in range(affixes.shape[0]):
-            x += mass_fraction[i] / np.power(z-affixes[i], k)
+    for i in range(affix.shape[0]):
+            x += mass_fraction[i] / np.power(z-affix[i], k)
     return w * x
 
 
