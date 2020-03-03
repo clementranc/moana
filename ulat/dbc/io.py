@@ -53,6 +53,7 @@ class Output:
         self.idx_data = i
         self.param = pd.Series(p)
         self.n_sfx = len(self.sfx)
+        self.__compute_missing_params()
 
     def __load_resid(self):
         fname = f'{self.path}/resid.{self.run}'
@@ -114,3 +115,11 @@ class Output:
                                         np.max(diff.loc[mask, 'sum_dchi2'])]})
 
         return diff, minmax
+
+    def __compute_missing_params(self):
+        """Compute parameters derived from others."""
+
+        locparam = self.param
+        rho = locparam['Tstar'] / locparam['t_E']
+        q = locparam['eps1'] / (1.0 - locparam['eps1'])
+        self.param = pd.concat([self.param, pd.Series({'rho': rho, 'q': q})])
