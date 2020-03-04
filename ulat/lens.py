@@ -225,7 +225,66 @@ def solve_lens_equation_2l(sep, q, x):
     z = [critic_2l(sep, q, a) for a in y]
     return np.array([lel2(sep, q, zc) for zc in z])
 
+def wide_limit_2l(q: np.ndarray) -> np.ndarray:
+    """Compute the limit between resonant and wide-separation caustics.
 
+    Args:
+        q: list of lens mass ratios.
+
+    Returns:
+        limit as a function of q.
+
+    """
+    cw = (1.0 + q**(1.0 / 3.0))**3 / (1.0 + q)
+    dw = np.power(cw, 0.5)
+    return dw
+
+def close_limit_2l(q: np.ndarray) -> np.ndarray:
+    """Compute the limit between resonant and close-separation caustics.
+
+    Args:
+        q: list of lens mass ratios.
+
+    Returns:
+        limit as a function of q.
+
+    """
+    if np.atleast_1d(q).shape[0] > 1:
+        dc = np.array([close_limit(a) for a in q])
+    else:
+        cc = (1.0 + q)**2 / (27.0 * q)
+
+        coeff = [cc, (1.0 - 3.0 * cc), 3.0 * cc, -cc]
+        x4 = np.roots(coeff)
+        dc = np.power(x4[np.where(np.abs(x4.imag) < 1e-10)].real[0], 1.0/4.0)
+    return dc
+
+def shape(s: np.ndarray, q: np.ndarray) -> np.ndarray:
+    """Compute the limit between resonant and close-separation caustics.
+
+    Args:
+        s: list of separation values.
+        q: list of lens mass ratios.
+
+    Returns:
+        list of str, where 'c' means close, 'r' means 'resonant', and 'w' means
+            wide'.
+
+    """
+    if np.atleast_1d(s).shape[0] > 1:
+        topology = np.array([shape(a, q) for a in s])
+    else:
+        dc = close_limit_2l(q)
+        dw = wide_limit_2l(q)
+
+        if s <= dc:
+            topology = 'c'
+        elif ((s <= dw) & (s > dc)): 
+            topology = 'r'
+        else: 
+            topology = 'w'
+
+    return topology
 
 
 
