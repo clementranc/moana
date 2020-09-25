@@ -3,7 +3,10 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 import sys
-from typing import Literal
+try:
+    from typing import Literal
+except:
+    from typing_extensions import Literal
 
 class LensReferenceFrame:
     """Reference frame where x-axis is a lens symmetry axis.
