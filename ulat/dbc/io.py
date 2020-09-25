@@ -48,6 +48,9 @@ class Output:
                         if float(l[i]) > 1e-10]
             i+=1
         file.close()
+
+        if not 'Tstar' in p: p.update({'Tstar': 0.0})
+        if not 'eps1' in p: p.update({'eps1': 0.0})
         
         self.sfx = [a[2:] for a in p if (a[0:2]=='A0') & (p[a] > 1e-10)]
         self.idx_data = i
