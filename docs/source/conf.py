@@ -13,15 +13,15 @@
 import datetime
 import os
 import sys
-import ulat
-sys.path.insert(0, os.path.abspath('../../ulat'))
+import moana
+sys.path.insert(0, os.path.abspath('../../moana'))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'ulat'
-copyright = f'{datetime.datetime.now().year}, Clément Ranc'
-author = 'Clément Ranc'
+project = 'moana'
+copyright = f'{datetime.datetime.now().year}, MOAna Contributors'
+author = 'Clément Ranc & Contributors (see AUTHORS)'
 
 # The short X.Y version
 version = ''

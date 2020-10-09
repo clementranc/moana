@@ -1,4 +1,4 @@
-name = 'ulat'
+name = 'moana'
 
 import os
 from setuptools import setup, Extension, Command
@@ -24,8 +24,8 @@ setup_args = dict(
     packages        = packages,
     description     = "",
     long_description= "",
-    author          = 'Clément Ranc',
-    author_email    = 'clement.ranc@protonmail.com',
+    author          = 'MOAna authors',
+    author_email    = 'clement.ranc@protonmail.ch',
     url             = '',
     license         = 'MIT',
     platforms       = "Linux, Mac OS X, Windows",

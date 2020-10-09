@@ -1,19 +1,19 @@
-Welcome to uLAT's documentation!
-================================
+Welcome to MOAna's documentation!
+=================================
 
-**uLAT** stands for MicroLensing Analysis Tools.
+**MOAna** stands for Microlensing Observations ANAlysis tool.
 
 How to use this documentation?
 ==============================
 
-After installing **ulat**, the user have access to the classes that
+After installing **moana**, the user have access to the classes that
 are listed below.
 
 .. toctree::
    :maxdepth: 2
    :caption: Content
 
-   ulat
+   moana
    dbc
 
 Indices and tables

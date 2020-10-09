@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import ulat.dbc as dbc
+import moana.dbc as dbc
 
 def from_parfile(filename: str, path: str = './') -> dbc.Dataset:
     """Load instrument properties from a 'par' file.
@@ -10,7 +10,7 @@ def from_parfile(filename: str, path: str = './') -> dbc.Dataset:
         path: path to the parfile
 
     Return:
-        A :obj:`ulat.dbc.Dataset` object.
+        A :obj:`moana.dbc.Dataset` object.
 
     """
     dataset = filename.split('par')[1]

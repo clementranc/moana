@@ -19,11 +19,11 @@ class Dataset:
 
     .. code-block:: python
 
-        >>> from ulat.dataset import Dataset
+        >>> from moana.dataset import Dataset
         >>> parfile = Dataset('OB151670')
 
     .. seealso::
-        :func:`ulat.dbc.tools.from_parfile`
+        :func:`moana.dbc.tools.from_parfile`
 
     Attributes:
         instruments: :obj:`pandas.DataFrame` with all the parameters of each instrument.

@@ -4,7 +4,7 @@ DB's modeling code Tools
 Input/Output
 ------------
 
-.. automodule:: ulat.dbc.tools
+.. automodule:: moana.dbc.tools
     :members:
     :undoc-members:
     :show-inheritance:
@@ -12,7 +12,7 @@ Input/Output
 Dataset
 -------
 
-.. automodule:: ulat.dbc.instruments
+.. automodule:: moana.dbc.instruments
     :members:
     :undoc-members:
     :show-inheritance:
@@ -20,7 +20,7 @@ Dataset
 Output files
 ------------
 
-.. automodule:: ulat.dbc.io
+.. automodule:: moana.dbc.io
     :members:
     :undoc-members:
     :show-inheritance:
