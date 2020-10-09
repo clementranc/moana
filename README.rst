@@ -2,11 +2,11 @@ uLAT
 ====
 
 .. image:: https://img.shields.io/badge/GitHub-clementranc%2Fulat-blue
-   :target: https://github.com/clementranc/ulat
-.. image:: https://travis-ci.org/clementranc/ulat.svg?branch=master
-   :target: https://travis-ci.org/clementranc/ulat
-.. image:: https://img.shields.io/github/license/clementranc/ulat?color=blue
-   :target: https://github.com/clementranc/ulat/blob/master/LICENSE
+   :target: https://github.com/clementranc/moana
+.. image:: https://travis-ci.org/clementranc/moana.svg?branch=master
+   :target: https://travis-ci.org/clementranc/moana
+.. image:: https://img.shields.io/github/license/clementranc/moana?color=blue
+   :target: https://github.com/clementranc/moana/blob/master/LICENSE
    :alt: GitHub License
 .. image:: https://readthedocs.org/projects/ulat/badge/?version=latest
    :target: https://ulat.readthedocs.io/en/latest/?badge=latest
