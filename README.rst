@@ -1,5 +1,5 @@
-uLAT
-====
+MOAna
+=====
 
 .. image:: https://img.shields.io/badge/GitHub-clementranc%2Fulat-blue
    :target: https://github.com/clementranc/moana
