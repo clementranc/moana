@@ -1,0 +1,262 @@
+### FONT
+#
+# font properties used by text.Text.  See
+# http://matplotlib.org/api/font_manager_api.html for more
+# information on font properties.  The 6 font properties used for font
+# matching are given below with their default values.
+#
+# The font.family property has five values: 'serif' (e.g., Times),
+# 'sans-serif' (e.g., Helvetica), 'cursive' (e.g., Zapf-Chancery),
+# 'fantasy' (e.g., Western), and 'monospace' (e.g., Courier).  Each of
+# these font families has a default list of font names in decreasing
+# order of priority associated with them.  When text.usetex is False,
+# font.family may also be one or more concrete font names.
+#
+# The font.style property has three values: normal (or roman), italic
+# or oblique.  The oblique style will be used for italic, if it is not
+# present.
+#
+# The font.variant property has two values: normal or small-caps.  For
+# TrueType fonts, which are scalable fonts, small-caps is equivalent
+# to using a font size of 'smaller', or about 83%% of the current font
+# size.
+#
+# The font.weight property has effectively 13 values: normal, bold,
+# bolder, lighter, 100, 200, 300, ..., 900.  Normal is the same as
+# 400, and bold is 700.  bolder and lighter are relative values with
+# respect to the current weight.
+#
+# The font.stretch property has 11 values: ultra-condensed,
+# extra-condensed, condensed, semi-condensed, normal, semi-expanded,
+# expanded, extra-expanded, ultra-expanded, wider, and narrower.  This
+# property is not currently implemented.
+#
+# The font.size property is the default font size for text, given in pts.
+# 10 pt is the standard value.
+#
+font.family         : sans-serif
+#font.style          : normal
+#font.variant        : normal
+#font.weight         : medium
+#font.stretch        : normal
+# note that font.size controls default text sizes.  To configure
+# special text sizes tick labels, axes, labels, title, etc, see the rc
+# settings for axes and ticks. Special text sizes can be defined
+# relative to font.size, using the following values: xx-small, x-small,
+# small, medium, large, x-large, xx-large, larger, or smaller
+font.size           : 8
+#font.serif          : DejaVu Serif, Bitstream Vera Serif, New Century Schoolbook, Century Schoolbook L, Utopia, ITC Bookman, Bookman, Nimbus Roman No9 L, Times New Roman, Times, Palatino, Charter, serif
+font.sans-serif     : DejaVu Sans, Bitstream Vera Sans, Lucida Grande, Verdana, Geneva, Lucid, Arial, Avant Garde, sans-serif
+#font.cursive        : Apple Chancery, Textile, Zapf Chancery, Sand, Script MT, Felipa, cursive
+#font.fantasy        : Comic Sans MS, Chicago, Charcoal, Impact, Western, Humor Sans, xkcd, fantasy
+#font.monospace      : DejaVu Sans Mono, Bitstream Vera Sans Mono, Andale Mono, Nimbus Mono L, Courier New, Courier, Fixed, Terminal, monospace
+
+### TEXT
+# text properties used by text.Text.  See
+# http://matplotlib.org/api/artist_api.html#module-matplotlib.text for more
+# information on text properties
+
+#text.color          : black
+
+### LaTeX customizations. See http://wiki.scipy.org/Cookbook/Matplotlib/UsingTex
+#text.usetex         : False    # use latex for all text handling. The following fonts
+                              # are supported through the usual rc parameter settings:
+                              # new century schoolbook, bookman, times, palatino,
+                              # zapf chancery, charter, serif, sans-serif, helvetica,
+                              # avant garde, courier, monospace, computer modern roman,
+                              # computer modern sans serif, computer modern typewriter
+                              # If another font is desired which can loaded using the
+                              # LaTeX \usepackage command, please inquire at the
+                              # matplotlib mailing list
+#text.latex.preamble : \usepackage{helvet}
+                            # IMPROPER USE OF THIS FEATURE WILL LEAD TO LATEX FAILURES
+                            # AND IS THEREFORE UNSUPPORTED. PLEASE DO NOT ASK FOR HELP
+                            # IF THIS FEATURE DOES NOT DO WHAT YOU EXPECT IT TO.
+                            # preamble is a comma separated list of LaTeX statements
+                            # that are included in the LaTeX document preamble.
+                            # An example:
+                            # text.latex.preamble : \usepackage{bm},\usepackage{euler}
+                            # The following packages are always loaded with usetex, so
+                            # beware of package collisions: color, geometry, graphicx,
+                            # type1cm, textcomp. Adobe Postscript (PSSNFS) font packages
+                            # may also be loaded, depending on your font settings
+#text.hinting : auto   # May be one of the following:
+                       #   'none': Perform no hinting
+                       #   'auto': Use FreeType's autohinter
+                       #   'native': Use the hinting information in the
+                       #             font file, if available, and if your
+                       #             FreeType library supports it
+                       #   'either': Use the native hinting information,
+                       #             or the autohinter if none is available.
+                       # For backward compatibility, this value may also be
+                       # True === 'auto' or False === 'none'.
+#text.hinting_factor : 8 # Specifies the amount of softness for hinting in the
+                         # horizontal direction.  A value of 1 will hint to full
+                         # pixels.  A value of 2 will hint to half pixels etc.
+
+#text.antialiased : True # If True (default), the text will be antialiased.
+                         # This only affects the Agg backend.
+
+# The following settings allow you to select the fonts in math mode.
+# They map from a TeX font name to a fontconfig font pattern.
+# These settings are only used if mathtext.fontset is 'custom'.
+# Note that this "custom" mode is unsupported and may go away in the
+# future.
+#mathtext.cal : cursive
+#mathtext.rm  : serif
+#mathtext.tt  : monospace
+#mathtext.it  : sans:italic
+#mathtext.bf  : serif:bold
+#mathtext.sf  : Helvetica:italic
+mathtext.fontset : custom # Should be 'dejavusans' (default),
+                               # 'dejavuserif', 'cm' (Computer Modern), 'stix',
+                               # 'stixsans' or 'custom'
+#mathtext.fallback_to_cm : True  # When True, use symbols from the Computer Modern
+                                 # fonts when a symbol can not be found in one of
+                                 # the custom math fonts.
+
+mathtext.default : regular # The default font to use for math.
+                       # Can be any of the LaTeX font names, including
+                       # the special name "regular" for the same font
+                       # used in regular text.
+
+### AXES
+# default face and edge color, default tick sizes,
+# default fontsizes for ticklabels, and so on.  See
+# http://matplotlib.org/api/axes_api.html#module-matplotlib.axes
+#axes.facecolor      : white   # axes background color
+#axes.edgecolor      : black   # axes edge color
+#axes.linewidth      : 0.8     # edge linewidth
+#axes.grid           : False   # display grid or not
+#axes.titlesize      : large   # fontsize of the axes title
+#axes.titlepad       : 6.0     # pad between axes and title in points
+axes.labelsize      : 8  # fontsize of the x any y labels
+#axes.labelpad       : 4.0     # space between label and axis
+#axes.labelweight    : normal  # weight of the x and y labels
+#axes.labelcolor     : black
+#axes.axisbelow      : 'line'  # draw axis gridlines and ticks below
+                               # patches (True); above patches but below
+                               # lines ('line'); or above all (False)
+
+#axes.formatter.limits : -7, 7 # use scientific notation if log10
+                               # of the axis range is smaller than the
+                               # first or larger than the second
+#axes.formatter.use_locale : False # When True, format tick labels
+                                   # according to the user's locale.
+                                   # For example, use ',' as a decimal
+                                   # separator in the fr_FR locale.
+#axes.formatter.use_mathtext : False # When True, use mathtext for scientific
+                                     # notation.
+#axes.formatter.min_exponent: 0 # minimum exponent to format in scientific notation
+axes.formatter.useoffset      : False    # If True, the tick label formatter
+                                         # will default to labeling ticks relative
+                                         # to an offset when the data range is
+                                         # small compared to the minimum absolute
+                                         # value of the data.
+#axes.formatter.offset_threshold : 4     # When useoffset is True, the offset
+                                         # will be used when it can remove
+                                         # at least this number of significant
+                                         # digits from tick labels.
+
+# axes.spines.left   : True   # display axis spines
+# axes.spines.bottom : True
+# axes.spines.top    : True
+# axes.spines.right  : True
+
+
+#axes.unicode_minus  : True    # use unicode for the minus symbol
+                               # rather than hyphen.  See
+                               # http://en.wikipedia.org/wiki/Plus_and_minus_signs#Character_codes
+# axes.prop_cycle    : cycler('color', ['1f77b4', 'ff7f0e', '2ca02c', 'd62728', '9467bd', '8c564b', 'e377c2', '7f7f7f', 'bcbd22', '17becf'])
+                      # color cycle for plot lines  as list of string
+                      # colorspecs: single letter, long name, or web-style hex
+#axes.autolimit_mode : data # How to scale axes limits to the data.
+                            # Use "data" to use data limits, plus some margin
+                            # Use "round_number" move to the nearest "round" number
+#axes.xmargin        : .05  # x margin.  See `axes.Axes.margins`
+#axes.ymargin        : .05  # y margin See `axes.Axes.margins`
+
+#polaraxes.grid      : True    # display grid on polar axes
+#axes3d.grid         : True    # display grid on 3d axes
+
+### DATES
+# These control the default format strings used in AutoDateFormatter.
+# Any valid format datetime format string can be used (see the python
+# `datetime` for details).  For example using '%%x' will use the locale date representation
+# '%%X' will use the locale time representation and '%%c' will use the full locale datetime
+# representation.
+# These values map to the scales:
+#    {'year': 365, 'month': 30, 'day': 1, 'hour': 1/24, 'minute': 1 / (24 * 60)}
+
+# date.autoformatter.year     : %Y
+# date.autoformatter.month    : %Y-%m
+# date.autoformatter.day      : %Y-%m-%d
+# date.autoformatter.hour     : %m-%d %H
+# date.autoformatter.minute   : %d %H:%M
+# date.autoformatter.second   : %H:%M:%S
+# date.autoformatter.microsecond   : %M:%S.%f
+
+### TICKS
+# see http://matplotlib.org/api/axis_api.html#matplotlib.axis.Tick
+xtick.top            : True   # draw ticks on the top side
+#xtick.bottom         : True   # draw ticks on the bottom side
+#xtick.major.size     : 3.5      # major tick size in points
+xtick.minor.size     : 2.5      # minor tick size in points
+xtick.major.width    : 0.8    # major tick width in points
+xtick.minor.width    : 0.4    # minor tick width in points
+xtick.major.pad      : 4.0      # distance to major tick label in points
+#xtick.minor.pad      : 3.4      # distance to the minor tick label in points
+#xtick.color          : k      # color of the tick labels
+xtick.labelsize      : 8 # fontsize of the tick labels
+xtick.direction      : in    # direction: in, out, or inout
+#xtick.minor.visible  : False  # visibility of minor ticks on x-axis
+#xtick.major.top      : True   # draw x axis top major ticks
+#xtick.major.bottom   : True   # draw x axis bottom major ticks
+#xtick.minor.top      : True   # draw x axis top minor ticks
+#xtick.minor.bottom   : True   # draw x axis bottom minor ticks
+
+#ytick.left           : True   # draw ticks on the left side
+ytick.right          : True  # draw ticks on the right side
+#ytick.major.size     : 3.5      # major tick size in points
+ytick.minor.size     : 2.5      # minor tick size in points
+ytick.major.width    : 0.8    # major tick width in points
+ytick.minor.width    : 0.4    # minor tick width in points
+ytick.major.pad      : 2.0      # distance to major tick label in points
+#ytick.minor.pad      : 3.4      # distance to the minor tick label in points
+#ytick.color          : k      # color of the tick labels
+ytick.labelsize      : 8 # fontsize of the tick labels
+ytick.direction      : in    # direction: in, out, or inout
+#ytick.minor.visible  : False  # visibility of minor ticks on y-axis
+#ytick.major.left     : True   # draw y axis left major ticks
+#ytick.major.right    : True   # draw y axis right major ticks
+#ytick.minor.left     : True   # draw y axis left minor ticks
+#ytick.minor.right    : True   # draw y axis right minor ticks
+
+
+### GRIDS
+#grid.color       :   b0b0b0    # grid color
+#grid.linestyle   :   -         # solid
+#grid.linewidth   :   0.8       # in points
+#grid.alpha       :   1.0       # transparency, between 0.0 and 1.0
+
+### Legend
+#legend.loc           : best
+legend.frameon       : False     # if True, draw the legend on a background patch
+#legend.framealpha    : 0.8      # legend patch transparency
+#legend.facecolor     : inherit  # inherit from axes.facecolor; or color spec
+#legend.edgecolor     : 0.8      # background patch boundary color
+#legend.fancybox      : True     # if True, use a rounded box for the
+                                 # legend background, else a rectangle
+#legend.shadow        : False    # if True, give background a shadow effect
+legend.numpoints     : 1        # the number of marker points in the legend line
+#legend.scatterpoints : 1        # number of scatter points
+#legend.markerscale   : 1.0      # the relative size of legend markers vs. original
+legend.fontsize      : 8
+# Dimensions as fraction of fontsize:
+#legend.borderpad     : 0.4      # border whitespace
+legend.labelspacing  : 0.4      # the vertical space between the legend entries
+legend.handlelength  : 1.0      # the length of the legend lines
+#legend.handleheight  : 0.7      # the height of the legend handle
+#legend.handletextpad : 0.8      # the space between the legend line and legend text
+#legend.borderaxespad : 0.5      # the border between the axes and legend edge
+legend.columnspacing : 1.0      # column separation
