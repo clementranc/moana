@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import moana.dbc as dbc
+import numpy as np
 
 def from_parfile(filename: str, path: str = './') -> dbc.Dataset:
     """Load instrument properties from a 'par' file.
@@ -29,3 +30,16 @@ def mass_fration_to_mass_ratio(x: float) -> float :
 
     """
     return x / (1 - x)
+
+def custom_floor(a: float, precision: int = 0) -> float :
+    """Truncate a number at a given digit.
+
+    Args:
+        a: number to be truncated.
+        precision: precision.
+
+    Return:
+        Truncated float of a.
+    """
+    return np.round(a - 0.5 * 10**(-precision), precision)
+
