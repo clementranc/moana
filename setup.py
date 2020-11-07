@@ -47,6 +47,7 @@ setuptools_args = {}
 
 install_requires = setuptools_args['install_requires'] = [
                                                           'bokeh>=0.12.4',
+                                                          'scipy',
                                                           'sphinx>=2.4',
                                                           'sphinx_press_theme'
 ]
