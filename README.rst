@@ -1,7 +1,7 @@
 MOAna
 =====
 
-.. image:: https://img.shields.io/badge/GitHub-clementranc%2Fulat-blue
+.. image:: https://img.shields.io/badge/GitHub-clementranc%2Fmoana-blue
    :target: https://github.com/clementranc/moana
 .. image:: https://travis-ci.org/clementranc/moana.svg?branch=master
    :target: https://travis-ci.org/clementranc/moana
