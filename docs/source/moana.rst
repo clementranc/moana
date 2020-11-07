@@ -12,3 +12,9 @@ Reference frames
 
 .. automodule:: moana.frames
     :members:
+
+Statistics
+----------
+
+.. automodule:: moana.estimators
+    :members:
