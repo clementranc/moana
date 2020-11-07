@@ -19,6 +19,7 @@ MOANA (or MOAna) stands for Microlensing Observations ANAlysis tools. This packa
 If you use this code, please add a reference to:
 
 .. code-block:: tex
+
    @software{moana,
      author       = {Clément Ranc},
      title        = {Microlensing Observations ANAlysis tools},
