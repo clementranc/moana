@@ -2,3 +2,4 @@ docs/build
 *egg-info*
 private
 *pycache*
+moana/corner
