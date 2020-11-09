@@ -42,7 +42,7 @@ class LensReferenceFrame:
     def x_axis(self):
         return self._x_axis
     
-    @center.setter
+    @x_axis.setter
     def x_axis(self, value):
         self._x_axis = value
         
@@ -71,6 +71,9 @@ class LensReferenceFrame:
         gl1 = kwargs['gl1']
         x_offset = 0
         
+        print(new_frame.center, new_frame.x_axis)
+        print(self.center, self.x_axis)
+
         if not self._center == new_frame.center:
             if self._center == 'primary':
                 if new_frame.center == 'secondary':
