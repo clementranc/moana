@@ -180,7 +180,7 @@ class SampledPosterior:
         bnds = [[1e-2, target]]
         res = minimize(self._plotsize, [target*0.9], args=(target), bounds=bnds)
         try:
-            final = moana.dbc.tools.custom_floor(res.x[0], precision=3)
+            final = moana.dbc.custom_floor(res.x[0], precision=3)
         except IndexError:
             final = target
         print(f"Each sub-plot must be {final:.3f}in x {final:.3f}in to have a figure of {target:.3f}in. Okay! I'm using it!")
