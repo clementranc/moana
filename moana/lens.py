@@ -254,14 +254,14 @@ class ResonantCaustic:
                     if bcurr==1: bcurr = 0
                     else: bcurr = 1
 
-            b1 = pd.concat([b1,b1tmp])
-            b2 = pd.concat([b2,b2tmp])
+            b1 = pd.concat([b1,b1tmp], sort=False)
+            b2 = pd.concat([b2,b2tmp], sort=False)
 
         b2tmp = pd.DataFrame()
         if z_B.imag >= 0:
             b2tmp['zeta'] = [z_B]
             b2tmp['phi'] = [2*np.pi]
-        b2 = pd.concat([b2,b2tmp])
+        b2 = pd.concat([b2,b2tmp], sort=False)
 
         b1.reset_index(inplace=True, drop=True)
         b2.reset_index(inplace=True, drop=True)
