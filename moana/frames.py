@@ -70,9 +70,6 @@ class LensReferenceFrame:
         sep = kwargs['sep']
         gl1 = kwargs['gl1']
         x_offset = 0
-        
-        print(new_frame.center, new_frame.x_axis)
-        print(self.center, self.x_axis)
 
         if not self._center == new_frame.center:
             if self._center == 'primary':
