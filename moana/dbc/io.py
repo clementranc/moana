@@ -72,6 +72,7 @@ class Output:
         self.resid = pd.read_table(fname, sep='\s+', names=colnames, 
                                    usecols=col, dtype=fmt, skiprows=self.idx_data)
         self.sfx = np.unique(self.resid.sfx)
+        self.n_sfx = len(self.sfx)
         
         # Use convention from Bennett's code
         # mgf_data --> magnification of data: (flux - fb / fs)
@@ -83,7 +84,7 @@ class Output:
         n_sfx = self.n_sfx
         fname = f'{self.path}/fit.lc_{self.run}'
         colnames = ['date', 'mgf', 'xs', 'ys']
-        col = [0, 1, 2 + n_sfx, 2 + n_sfx + 1]
+        col = [0, 1, 2 + n_sfx, 3 + n_sfx]
         fmt = { 'date': np.float64,
                 'mgf_model': np.float64,
                 'xs': np.float64,
