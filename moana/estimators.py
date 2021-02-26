@@ -14,6 +14,8 @@ class SampledPosterior:
     Args:
         sample: sample for 1+ parameters.
         labels: labels of columns to include in statistics.
+        weights: this str indicates which column is used to weight
+            the samples.
 
     Attributes:
         sample: :obj:`pandas.DataFrame` of the parameters.
@@ -21,9 +23,10 @@ class SampledPosterior:
             sorted values in cdf[label][0] and the cumulative function in
             cdf[label][1].
     """
-    def __init__(self, sample: pd.DataFrame, labels: list, limit=None):
+    def __init__(self, sample: pd.DataFrame, labels: list, limit=None, weights : str = None):
         self.sample = sample
         self.request = labels
+        self.weights = weights
 
         if limit == None:
             self.limit = [0.1585, 0.5, 0.8415]
@@ -32,37 +35,56 @@ class SampledPosterior:
 
         self.cdf = dict()
         self.ci = dict()
-        
-        for l in self.request:
-            self.cdf.update({l: self.build_cdf(l)})
-            self.ci.update({l: self.find_limits(l, self.limit)})
 
-    def build_cdf(self, label: str) -> np.array :
+        try:        
+            for l in self.request:
+                self.cdf.update({l: self.build_cdf(l, weights=weights)})
+                self.ci.update({l: self.find_limits(l, self.limit)})
+        except:
+            print("Cannot determine credible intervals.")
+
+    def build_cdf(self,
+        label: str, 
+        weights : str = None) -> np.array :
         """Build the cumulative distribution function.
 
         Args:
             label: this str indicates which column is used.
+            weights: this str indicates which column is used to weight
+                the samples.
 
         Return:
             Array of the sorted values (column 0) and the cumulative function
                 (column 1).
         """
-        return np.array([self.sample.sort_values(label)[label].values, 
-            (np.arange(len(self.sample)) + 1) / len(self.sample)])
 
-    def find_limits(self, label: str, limit: list) -> np.array :
+        if not weights == None:
+            table = self.sample.sort_values(label)
+            w = table[weights].values
+            return np.array([table[label].values, np.cumsum(w) / np.sum(w)])
+        else:
+            return np.array([self.sample.sort_values(label)[label].values, 
+                (np.arange(len(self.sample)) + 1) / len(self.sample)])
+
+    def find_limits(self, 
+        label: str, 
+        limit: list,
+        ) -> np.array :
         """Determine the parameter values based on a given probability.
 
         Args:
             label: this str indicates which column is used.
             limit: list of probability values.
+            weights: this str indicates which column is used to weight
+                the samples.
 
         Return:
             Array of the corresponding values of the parameter.
         """
         ci = np.array([])
+        cdf = self.cdf[label]
+
         for l in limit:
-            cdf = self.cdf[label]
             fintp = interp1d(cdf[0], cdf[1] - l, kind='linear')
             ci = np.append(ci, scipy.optimize.brentq(fintp, np.min(cdf[0]), 
                 np.max(cdf[0])))
@@ -204,7 +226,7 @@ class SampledPosterior:
         align_xlabels = True,
         align_ylabels = True,
         cdf_levels = None,
-        weights = None,
+        weights = True,
         rotation = 0,
         display_1sigma = False,
         rcfile = None,
@@ -214,19 +236,24 @@ class SampledPosterior:
         N = len(self.request)
 
         # Definition of the figure and axes
-        if (figure == None) | (axes == None):
+        if isinstance(figure, mpl.figure.Figure) | isinstance(axes, np.ndarray):
+            fig = figure
+            ax = axes
+        else:
             self._get_plot_config_scatter_plots(rcfile=rcfile, rotation=rotation, rcparams=rcparams)
             width, lb, tr, wh_margin = self.scatter_plot_scaling()
             fig, ax = plt.subplots(N, N, figsize=[width, width])
             fig.subplots_adjust(left=lb, bottom=lb, right=tr, top=tr, wspace=wh_margin, 
                                 hspace=wh_margin)
-        else:
-            fig = figure
-            ax = axes
 
         # Compute credible intervals
-        xhist, yhist, hist, hist_levels = self.get2dcontours(
-            cdf_levels=cdf_levels, weights=weights, **bins)
+        if weights & isinstance(self.weights, str):
+            xhist, yhist, hist, hist_levels = self.get2dcontours(
+                cdf_levels=cdf_levels, weights=self.sample[self.weights].values, 
+                **bins)
+        else:
+            xhist, yhist, hist, hist_levels = self.get2dcontours(
+                cdf_levels=cdf_levels, weights=None, **bins)
 
         # How label are displayed
         label_names = dict()
