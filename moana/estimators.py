@@ -231,7 +231,8 @@ class SampledPosterior:
         rotation = 0,
         display_1sigma = False,
         rcfile = None,
-        rcparams = dict()
+        rcparams = dict(),
+        bins_density = dict()
         ):
 
         N = len(self.request)
@@ -424,6 +425,39 @@ class SampledPosterior:
                                 ax[i][j].xaxis.set_major_locator(MultipleLocator(ax_options[labels[j]][2][0]))
                                 ax[i][j].xaxis.set_minor_locator(AutoMinorLocator(ax_options[labels[j]][2][1]))
 
+                        elif diagonal == 'density':
+                            bins_density_hist = dict()
+                            [bins_density_hist.update({label: 100}) for label in labels]
+                            bins_density_hist.update(bins_density)
+                            weight_bins, edge_bins, patches = ax[i][i].hist(self.sample[labels[i]],
+                                                                       bins_density_hist[labels[i]],
+                                                                       density=True, histtype='step', color='k')
+                            if display_1sigma:
+                                x = self.ci[labels[j]][1]
+                                y = 0.1*np.amax(weight_bins)
+                                xerr = np.array([[x - self.ci[labels[j]][0], self.ci[labels[j]][2] - x]]).T
+                                ax[i][i].errorbar(x, y, xerr=xerr, marker='o', ms=2, lw=0.5, capsize=0, color='k')
+
+                            ax[i][i].yaxis.set_label_position("right")
+                            ax[i][i].spines['left'].set_visible(False)
+                            ax[i][i].spines['top'].set_visible(False)
+                            ax[i][i].tick_params(which='both', bottom=True, top=False, left=False, right=True,
+                                                 labelbottom=True, labeltop=False, labelleft=False, labelright=True,
+                                                 pad=2)
+                            ax[i][i].set_ylabel(r"Density")
+
+                            # Choose same ticks for a column
+                            if i < N - 1:
+                                ax[i][i].get_shared_x_axes().join(ax[i][i], ax[i + 1][i])
+
+                            # Limits
+                            if not ax_options[labels[j]][0] == None:
+                                ax[i][j].set_xlim(ax_options[labels[j]][0][0], ax_options[labels[j]][0][1])
+
+                            # Ticks position and occurence
+                            if not ax_options[labels[j]][2] == None:
+                                ax[i][j].xaxis.set_major_locator(MultipleLocator(ax_options[labels[j]][2][0]))
+                                ax[i][j].xaxis.set_minor_locator(AutoMinorLocator(ax_options[labels[j]][2][1]))
         if align_xlabels: fig.align_xlabels(ax[N-1, :])
         if align_ylabels: fig.align_ylabels(ax[:, 0])
 

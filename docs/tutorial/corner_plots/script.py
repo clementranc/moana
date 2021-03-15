@@ -1,3 +1,4 @@
+import matplotlib as mpl
 import moana
 import numpy as np
 import pandas as pd
@@ -207,6 +208,22 @@ if __name__ == '__main__':
     rcparams=dict({'xtick.major.size': 8, 'xtick.labelsize': 12})
     posterior.corner_plot(filename=fname, labels=column_labels, axes_options=ax_opts,
         bins=bins, rcparams=rcparams)
+    mpl.rcParams.update(mpl.rcParamsDefault)  # Restaure default Matplotlib rcparams for next examples
+
+    # --- Plot the beautiful corner plot: EXAMPLE 10 ---
+    # We want probability density function in all the diagonals.
+    # The bins for each diagonal plot can be set individually.
+    print("Example 10...")
+    fname = 'Example_10.png'
+    bins_for_pdf = dict()
+    bins_for_pdf.update({
+        'u0': 10,
+        'tE': 1000,
+    })
+    posterior.corner_plot(filename=fname, labels=column_labels, axes_options=ax_opts,
+                          rotation=30, display_1sigma=True,
+                          diagonal='density', bins_density=bins_for_pdf,
+                          bins=bins)
 
     # Note 1: If an option in rcparams is not respected, then it means that
     # this option has been changed in the plotting routine. If it happens,
