@@ -2,7 +2,7 @@ version: 2
 
 # Build documentation in the docs/ directory with Sphinx
 sphinx:
-  version: 3.4.3
+  builder: html
   configuration: docs/source/conf.py
 
 # Optionally build your docs in additional formats such as PDF and ePub
@@ -14,3 +14,4 @@ python:
   install:
      - method: setuptools
        path: .
+     - requirements: docs/requirements.txt
