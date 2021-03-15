@@ -36,12 +36,13 @@ class SampledPosterior:
         self.cdf = dict()
         self.ci = dict()
 
-        try:        
-            for l in self.request:
-                self.cdf.update({l: self.build_cdf(l, weights=weights)})
-                self.ci.update({l: self.find_limits(l, self.limit)})
-        except:
-            print("Cannot determine credible intervals.")
+        for l in self.request:
+            try:            
+                    self.cdf.update({l: self.build_cdf(l, weights=weights)})
+                    self.ci.update({l: self.find_limits(l, self.limit)})
+            except:
+                print(f"Cannot determine credible intervals for {l}")
+                print("Values cannot be NaN, they must be real.")
 
     def build_cdf(self,
         label: str, 
