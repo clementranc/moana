@@ -24,9 +24,9 @@ copyright = f'{datetime.datetime.now().year}, MOAna Contributors'
 author = 'Clément Ranc & Contributors (see AUTHORS)'
 
 # The short X.Y version
-version = ''
+version = '0.2'
 # The full version, including alpha/beta/rc tags
-release = '0.1'
+release = 'alpha'
 
 
 # -- General configuration ---------------------------------------------------
