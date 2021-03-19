@@ -38,6 +38,7 @@ class Output:
         p = dict()
         for line in file:
             l = re.split('\s+', line.strip())
+            print(l)
             if (i%2 == 0) & (l[0]=='t'): 
                 i+=1
                 break
@@ -45,7 +46,7 @@ class Output:
                 x = l
             elif not i%2 == 0:
                 [p.update({x[i]: float(l[i])}) for i in range(len(l))
-                        if float(l[i]) > 1e-10]
+                        if np.abs(float(l[i])) > 1e-10]
             i+=1
         file.close()
 
