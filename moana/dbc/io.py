@@ -38,7 +38,6 @@ class Output:
         p = dict()
         for line in file:
             l = re.split('\s+', line.strip())
-            print(l)
             if (i%2 == 0) & (l[0]=='t'): 
                 i+=1
                 break
