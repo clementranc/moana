@@ -29,7 +29,7 @@ class SampledPosterior:
         self.weights = weights
 
         if limit == None:
-            self.limit = [0.1585, 0.5, 0.8415]
+            self.limit = [0.1585, 0.5, 0.8415]  # Default limits
         else:
             self.limit = limit
 
