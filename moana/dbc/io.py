@@ -17,10 +17,12 @@ class Output:
         resid: :obj:`pandas.DataFrame` of the data.
 
     """
-    def __init__(self, run: str, path: str = './'):
+    def __init__(self, run: str, path: str = './', **kwargs):
         self.path = path
         self.run = run
         self.param = None
+        if kwargs == None: self.kwargs = dict()
+        else: self.kwargs = kwargs
         
     def load(self, resid=True, model=True):
         """Method that load the output files."""
@@ -81,18 +83,40 @@ class Output:
         self.resid['res_mgf'] = - self.resid['res_mgf']
         
     def __load_fitlc(self):
-        n_sfx = self.n_sfx
-        fname = f'{self.path}/fit.lc_{self.run}'
-        colnames = ['date', 'mgf', 'xs', 'ys']
-        col = [0, 1, 2 + n_sfx, 3 + n_sfx]
-        fmt = { 'date': np.float64,
-                'mgf_model': np.float64,
-                'xs': np.float64,
-                'ys': np.float64}
-        self.fitlc = pd.read_table(fname, sep='\s+', names=colnames, usecols=col, 
-                                   dtype=fmt, skiprows=self.idx_data-1)
-        #print self.fitlc
-       
+
+        if 'dataset' in self.kwargs:
+            parfa = self.kwargs['dataset']
+            colnames = ['date', 'mgf']
+            [colnames.append(f'flux_{a}') for a in list(parfa.instruments[parfa.instruments['lcfile']]['sfx'].values)]
+            [colnames.append(a) for a in ['xs', 'ys']]
+            col = range(len(colnames))
+            fmt = dict()
+            [fmt.update({a : np.float64}) for a in colnames]
+            fname = f'{self.path}/fit.lc_{self.run}'
+            self.fitlc = pd.read_table(fname, sep='\s+', names=colnames, usecols=col, 
+                                       dtype=fmt, skiprows=self.idx_data-1)
+
+            # Compute magnification from flux
+            ordered_instruments = list(parfa.instruments[parfa.instruments['lcfile']]['sfx'].values)
+            for i in range(len(ordered_instruments)):
+                instr = ordered_instruments[i]
+                try:
+                    self.fitlc[f'mgf_{instr}'] = (self.fitlc[f'flux_{instr}'] - self.param[f'A2{instr}']) / self.param[f'A0{instr}']
+                except:
+                    self.fitlc[f'mgf_{instr}'] = -1
+
+        else:
+            n_sfx = self.n_sfx
+            fname = f'{self.path}/fit.lc_{self.run}'
+            colnames = ['date', 'mgf', 'xs', 'ys']
+            col = [0, 1, 2 + n_sfx, 3 + n_sfx]
+            fmt = { 'date': np.float64,
+                    'mgf_model': np.float64,
+                    'xs': np.float64,
+                    'ys': np.float64}
+            self.fitlc = pd.read_table(fname, sep='\s+', names=colnames, usecols=col, 
+                                       dtype=fmt, skiprows=self.idx_data-1)            
+
     def compare(self, model):
         
         diff = pd.DataFrame()
