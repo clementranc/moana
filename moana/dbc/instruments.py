@@ -72,17 +72,17 @@ class Dataset:
 
         mask = (9 <= self.instruments.jclr)\
                 & (self.instruments.jclr <= 14)
-        self.instruments.at[mask, 'data_type'] = 'mag0'
+        self.instruments.loc[mask, 'data_type'] = 'mag0'
         mask = (15 <= self.instruments.jclr)\
                 & (self.instruments.jclr <= 29)
-        self.instruments.at[mask, 'data_type'] = 'mag21'
+        self.instruments.loc[mask, 'data_type'] = 'mag21'
         mask = (30 <= self.instruments.jclr)\
                 & (self.instruments.jclr <= 39)
-        self.instruments.at[mask, 'data_type'] = 'flux'
+        self.instruments.loc[mask, 'data_type'] = 'flux'
         mask = (40 <= self.instruments.jclr)\
                 & (self.instruments.jclr <= 49)
-        self.instruments.at[mask, 'data_type'] = 'mag21'
+        self.instruments.loc[mask, 'data_type'] = 'mag21'
         mask = (50 <= self.instruments.jclr)\
                 & (self.instruments.jclr <= 59)
-        self.instruments.at[mask, 'data_type'] = 'flux'
+        self.instruments.loc[mask, 'data_type'] = 'flux'
 
