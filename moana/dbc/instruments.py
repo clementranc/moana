@@ -52,7 +52,7 @@ class Dataset:
                'ald': np.float64,
                'bld': np.float64, 
                'dayoff': np.float64, 
-               'sfx': np.str, 
+               'sfx': str, 
                'long': np.float64, 
                'lat': np.float64}
         x = pd.read_table(fname, sep='\s+', names=colnames,
