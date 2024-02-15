@@ -26,7 +26,8 @@ def compute_2dcontours(x, y, bins=50, cdf_levels=None, weights=None):
     hist1d = hist1d[np.argsort(hist1d)[::-1]]
     cumul = np.cumsum(hist1d)
     if weights is not None:
-        print("Test for weighted histogram: okay is {:.9e} ~ 0.".format(
+        if not np.isclose(cumul[-1], np.cumsum(weights)[-1], rtol=1e-3):
+            print("Test for weighted histogram: okay is {:.9e} ~ 0.".format(
         cumul[-1] - np.cumsum(weights)[-1]))
     cumul = cumul / cumul[-1]
     levels = np.zeros(len(cdf_levels))

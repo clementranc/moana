@@ -347,8 +347,10 @@ class SampledPosterior:
                     else:
                         ax[i][j].set_xlabel("")
                         ax[i][j].set_xticklabels([])
+                        ax[i][j].tick_params(labelbottom=False)
                         if j != N - 2:
-                            ax[i][j].get_shared_x_axes().join(ax[i][j], ax[i + 1][j])
+                            ax[i][j].sharex(ax[i + 1][j])
+
                     if j == 0:
                         if i == 0:
                             ax[i][j].set_ylabel(rf"${label_names[labels[i]]}$")
@@ -479,9 +481,7 @@ class SampledPosterior:
 
                             # Choose same ticks for a column
                             if i < N - 1:
-                                ax[i][i].get_shared_x_axes().join(
-                                    ax[i][i], ax[i + 1][i]
-                                )
+                                ax[i][i].sharex(ax[i + 1][i])
                         elif diagonal == "cumul":
                             cdf = self.cdf[labels[j]]
                             ax[i][i].plot(cdf[0], cdf[1], ls="-", lw=1, c="k")
@@ -530,9 +530,7 @@ class SampledPosterior:
 
                             # Choose same ticks for a column
                             if i < N - 1:
-                                ax[i][i].get_shared_x_axes().join(
-                                    ax[i][i], ax[i + 1][i]
-                                )
+                                ax[i][i].sharex(ax[i + 1][i])
 
                             # Limits
                             if not ax_options[labels[j]][0] == None:
@@ -554,14 +552,24 @@ class SampledPosterior:
                             bins_density_hist = dict()
                             [bins_density_hist.update({label: 100}) for label in labels]
                             bins_density_hist.update(bins_density)
-                            weight_bins, edge_bins, patches = ax[i][i].hist(
-                                self.sample[labels[i]],
-                                bins_density_hist[labels[i]],
-                                density=True,
-                                histtype="step",
-                                color="k",
-                                weights=self.sample[self.weights].values,
-                            )
+                            if weights & isinstance(self.weights, str):
+                                weight_bins, edge_bins, patches = ax[i][i].hist(
+                                    self.sample[labels[i]],
+                                    bins_density_hist[labels[i]],
+                                    density=True,
+                                    histtype="step",
+                                    color="k",
+                                    weights=self.sample[self.weights].values,
+                                )
+                            else:
+                                weight_bins, edge_bins, patches = ax[i][i].hist(
+                                    self.sample[labels[i]],
+                                    bins_density_hist[labels[i]],
+                                    density=True,
+                                    histtype="step",
+                                    color="k",
+                                )
+
                             if display_1sigma:
                                 x = self.ci[labels[j]][1]
                                 y = 0.1 * np.amax(weight_bins)
@@ -603,9 +611,7 @@ class SampledPosterior:
 
                             # Choose same ticks for a column
                             if i < N - 1:
-                                ax[i][i].get_shared_x_axes().join(
-                                    ax[i][i], ax[i + 1][i]
-                                )
+                                ax[i][i].sharex(ax[i + 1][i])
 
                             # Limits
                             if not ax_options[labels[j]][0] == None:
@@ -622,6 +628,10 @@ class SampledPosterior:
                                 ax[i][j].xaxis.set_minor_locator(
                                     AutoMinorLocator(ax_options[labels[j]][2][1])
                                 )
+
+
+        ax[N-2][N-2].tick_params(labelbottom=False)
+
         if align_xlabels:
             fig.align_xlabels(ax[N - 1, :])
         if align_ylabels:
