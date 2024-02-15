@@ -25,7 +25,7 @@ setup_args = dict(
     description     = "",
     long_description= "",
     author          = 'MOAna authors',
-    author_email    = 'clement.ranc@protonmail.ch',
+    author_email    = 'ranc@iap.fr',
     url             = '',
     license         = 'MIT',
     platforms       = "Linux, Mac OS X, Windows",
@@ -36,7 +36,7 @@ setup_args = dict(
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: MIT',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.11',
                        ],
 )
 
@@ -46,9 +46,9 @@ if 'develop' in sys.argv or any(a.startswith('bdist') for a in sys.argv):
 setuptools_args = {}
 
 install_requires = setuptools_args['install_requires'] = [
-                                                          'bokeh>=0.12.4',
+                                                          'wheel',
                                                           'scipy',
-                                                          'sphinx>=2.4',
+                                                          'sphinx',
                                                           'sphinx_press_theme'
 ]
 
