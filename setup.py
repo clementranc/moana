@@ -1,17 +1,12 @@
 import os
 from setuptools import setup
 
-name='moana-pypi'
-packages = []
-pjoin = os.path.join
-here = os.path.abspath(os.path.dirname(__file__))
-for d, _, _ in os.walk(pjoin(here, name)):
-    if os.path.exists(pjoin(d, '__init__.py')):
-        packages.append(d[len(here) + 1:].replace(os.path.sep, '.'))
-
-setup(name=name,
-      version='0.2',
-      packages=packages,
+setup(name='moana-pypi',
+      version='0.2.1',
+      packages=['moana',
+                'moana.corner',
+                'moana.dbc',
+                'moana.stylelib'],
       description="",
       long_description="",
       author='Clément Ranc, Stela Ishitani Silva, MOAna authors',
