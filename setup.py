@@ -1,62 +1,35 @@
-name = 'moana'
-
 import os
-from setuptools import setup, Extension, Command
-import sys
+from setuptools import setup
 
-setup(name = name)
- 
+name='moana-pypi'
+packages = []
 pjoin = os.path.join
 here = os.path.abspath(os.path.dirname(__file__))
-
-packages = []
 for d, _, _ in os.walk(pjoin(here, name)):
     if os.path.exists(pjoin(d, '__init__.py')):
-        packages.append(d[len(here)+1:].replace(os.path.sep, '.'))
+        packages.append(d[len(here) + 1:].replace(os.path.sep, '.'))
 
-version_ns = {}
-with open(pjoin(here, name, '_version.py')) as f:
-    exec(f.read(), {}, version_ns)
-
-setup_args = dict(
-    name            = name,
-    version         = version_ns['__version__'],
-    packages        = packages,
-    description     = "",
-    long_description= "",
-    author          = 'MOAna authors',
-    author_email    = 'ranc@iap.fr',
-    url             = '',
-    license         = 'MIT',
-    platforms       = "Linux, Mac OS X, Windows",
-    keywords        = ['Astronomy', 'Microlensing', 'Science'],
-    classifiers     = [
-        'Intended Audience :: Developers',
-        'Intended Audience :: System Administrators',
-        'Intended Audience :: Science/Research',
-        'License :: OSI Approved :: MIT',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3.11',
-                       ],
-)
-
-if 'develop' in sys.argv or any(a.startswith('bdist') for a in sys.argv):
-    import setuptools
-
-setuptools_args = {}
-
-install_requires = setuptools_args['install_requires'] = [
-                                                          'wheel',
-                                                          'scipy',
-                                                          'sphinx',
-                                                          'sphinx_press_theme'
-]
-
-extras_require = setuptools_args['extras_require'] = {
-}
-
-if 'setuptools' in sys.modules:
-    setup_args.update(setuptools_args)
-
-if __name__ == '__main__':
-    setup(**setup_args)
+setup(name=name,
+      version='0.2',
+      packages=packages,
+      description="",
+      long_description="",
+      author='Clément Ranc, Stela Ishitani Silva, MOAna authors',
+      author_email='ranc@iap.fr',
+      maintainer_email= 'stela.ishitanisilva@nasa.gov',
+      url='',
+      license='MIT',
+      platforms="Linux, Mac OS X, Windows",
+      keywords=['Astronomy', 'Microlensing', 'Science'],
+      classifiers=[
+          'Intended Audience :: Developers',
+          'Intended Audience :: System Administrators',
+          'Intended Audience :: Science/Research',
+          'Programming Language :: Python',
+          'Programming Language :: Python :: 3.11',
+      ],
+      install_requires=[
+          'wheel==0.43.0',
+          'scipy==1.13.1',
+          'sphinx==7.3.7',
+          'sphinx_press_theme==0.9.1'])
