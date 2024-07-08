@@ -2,11 +2,10 @@ import os
 from setuptools import setup
 
 setup(name='moana-pypi',
-      version='0.2.1',
+      version='0.2.2',
       packages=['moana',
                 'moana.corner',
-                'moana.dbc',
-                'moana.stylelib'],
+                'moana.dbc'],
       description="",
       long_description="",
       author='Clément Ranc, Stela Ishitani Silva, MOAna authors',
