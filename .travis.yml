@@ -1,7 +1,0 @@
-language: python
-python:
-    - 3.12
-install:
-    - python -m pip install .
-script:
-    - echo "No test to perform."
