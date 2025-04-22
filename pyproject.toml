@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "moana"
+version = "0.2.0"
+license = "MIT"
+readme = "README.rst"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/clementranc/moana"
