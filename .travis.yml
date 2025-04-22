@@ -1,7 +1,7 @@
 language: python
 python:
-    - 3.8
+    - 3.12
 install:
-    - python setup.py install
+    - python -m pip install .
 script:
     - echo "No test to perform."
