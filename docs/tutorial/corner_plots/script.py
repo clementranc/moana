@@ -25,7 +25,7 @@ if __name__ == '__main__':
     # Load MCMC output
     fname = f'{path_mcmc}/{run_name}.dat'
     print(f'Loading {fname}...')
-    data = pd.read_table(fname, sep='\s+', names=colnames, usecols=cols, 
+    data = pd.read_table(fname, sep=r'\s+', names=colnames, usecols=cols, 
         dtype=np.float64, skiprows=N_burn)
 
     # --- Preparation of the Dataframe ---

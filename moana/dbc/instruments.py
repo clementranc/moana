@@ -55,7 +55,7 @@ class Dataset:
                'sfx': str, 
                'long': np.float64, 
                'lat': np.float64}
-        x = pd.read_table(fname, sep='\s+', names=colnames,
+        x = pd.read_table(fname, sep=r'\s+', names=colnames,
                 usecols=col, dtype=fmt, skiprows=3)
         for i in range(len(x)):
             x.at[i, 'sfx'] = x.at[i, 'sfx'].replace("'", "")
