@@ -39,7 +39,7 @@ class Output:
         i = 0
         p = dict()
         for line in file:
-            l = re.split('\s+', line.strip())
+            l = re.split(r'\s+', line.strip())
             if (i%2 == 0) & (l[0]=='t'): 
                 i+=1
                 break
@@ -71,7 +71,7 @@ class Output:
                 'chi2': np.float64,
                 'jclr': np.int64,
                 'sfx': str}
-        self.resid = pd.read_table(fname, sep='\s+', names=colnames, 
+        self.resid = pd.read_table(fname, sep=r'\s+', names=colnames,
                                    usecols=col, dtype=fmt, skiprows=self.idx_data)
         self.sfx = np.unique(self.resid.sfx)
         self.n_sfx = len(self.sfx)
@@ -93,7 +93,7 @@ class Output:
             fmt = dict()
             [fmt.update({a : np.float64}) for a in colnames]
             fname = f'{self.path}/fit.lc_{self.run}'
-            self.fitlc = pd.read_table(fname, sep='\s+', names=colnames, usecols=col, 
+            self.fitlc = pd.read_table(fname, sep=r'\s+', names=colnames, usecols=col,
                                        dtype=fmt, skiprows=self.idx_data-1)
 
             # Compute magnification from flux
@@ -114,7 +114,7 @@ class Output:
                     'mgf_model': np.float64,
                     'xs': np.float64,
                     'ys': np.float64}
-            self.fitlc = pd.read_table(fname, sep='\s+', names=colnames, usecols=col, 
+            self.fitlc = pd.read_table(fname, sep=r'\s+', names=colnames, usecols=col,
                                        dtype=fmt, skiprows=self.idx_data-1)            
 
     def compare(self, model):
