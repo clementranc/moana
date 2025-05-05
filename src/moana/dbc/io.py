@@ -70,7 +70,7 @@ class Output:
                 'sig_mgf': np.float64,
                 'chi2': np.float64,
                 'jclr': np.int64,
-                'sfx': np.str}
+                'sfx': str}
         self.resid = pd.read_table(fname, sep='\s+', names=colnames, 
                                    usecols=col, dtype=fmt, skiprows=self.idx_data)
         self.sfx = np.unique(self.resid.sfx)
