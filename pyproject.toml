@@ -11,7 +11,7 @@ authors = [
     { name = "Stela IS" },
     { name = "MOAna authors" },
 ]
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 dependencies = [
     "matplotlib>=3.8.4",
     "pandas>=2.1.4",
@@ -31,8 +31,11 @@ path = "src/moana/__about__.py"
 [tool.hatch.build.targets.wheel]
 packages = ["src/moana"]
 
+[tool.hatch.envs.all]
+dependencies = ["pytest"]
+
 [[tool.hatch.envs.all.matrix]]
-python = ["3.11", "3.12"]
+python = ["3.10", "3.11", "3.12"]
 
 [tool.hatch.envs.default.scripts]
 test = "pytest {args:tests}"
