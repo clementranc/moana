@@ -1,18 +1,41 @@
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
-
 [project]
-name = "moana"
-version = "0.2.0"
-license = "MIT"
+name = "moana-astro"
+dynamic = ["version"]
+description = "MOAna: Microlensing Observations ANAlysis tools"
 readme = "README.rst"
-requires-python = ">=3.11"
+license = "MIT"
+authors = [
+    { name = "Clément Ranc" },
+    { email = "ranc@iap.fr" },
+    { name = "Stela Ishitani Silva" },
+    { name = "Greg Olmschenk" },
+    { name = "MOAna authors" },
+]
+requires-python = ">=3.10"
 dependencies = [
-    "matplotlib",
-    "pandas",
-    "scipy",
+    "matplotlib>=3.8.4",
+    "pandas>=2.1.4",
+    "scipy>=1.14.1",
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/clementranc/moana"
+Homepage = "https://github.com/clementranc/moana"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/moana/__about__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/moana"]
+
+[tool.hatch.envs.all]
+dependencies = ["pytest"]
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.10", "3.11", "3.12"]
+
+[tool.hatch.envs.default.scripts]
+test = "pytest {args:tests}"

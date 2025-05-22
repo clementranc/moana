@@ -1,4 +1,4 @@
-from ._version import version_info, __version__
+from .__about__ import __version__
 
 from moana.estimators import SampledPosterior
 from moana.frames import LensReferenceFrame
