@@ -1,14 +1,14 @@
 [project]
-name = "moana-pypi"
+name = "moana-astro"
 dynamic = ["version"]
 description = "MOAna: Microlensing Observations ANAlysis tools"
 readme = "README.rst"
 license = "MIT"
 authors = [
     { name = "Clément Ranc" },
-    { email = "ranc@iap.fr"},
-    { name = "Stela IS" },
-    { name = "Stela IS" },
+    { email = "ranc@iap.fr" },
+    { name = "Stela Ishitani Silva" },
+    { name = "Greg Olmschenk" },
     { name = "MOAna authors" },
 ]
 requires-python = ">=3.10"
